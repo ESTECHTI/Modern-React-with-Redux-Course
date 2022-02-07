@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSnowflake, faSun } from '@fortawesome/free-solid-svg-icons'
+import './SeasonDisplay.css'
 
 const seasonConfig = {
   summer: {
@@ -23,13 +24,18 @@ const getSeason = (lat, month, year) => {
 
 const SeasonDisplay = (props) => {
   const season = getSeason(props.lat, new Date().getMonth());
+  console.log('season', season)
   const { text, iconName } = seasonConfig[season];
 
   return (
-    <div>
-      <FontAwesomeIcon icon={iconName} size="6x"/>
+    <div className={`season-display ${season}`}>
         <h1>{text}</h1>
-      <FontAwesomeIcon icon={iconName} size="6x"/>
+      <FontAwesomeIcon 
+        className='icon-right' 
+        style={ season === 'summer' ? { color: 'orange'} : season === 'winter' ? {color: 'aliceblue'} : ''} 
+        icon={iconName} 
+        size="6x"
+      />
     </div>
   )
 }
